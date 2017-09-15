@@ -1,13 +1,12 @@
 #!/bin/bash
 
+echo "Initializing setup..."
 # Vars
-EMAIL="trenton.colley@hootsuite.com"
+echo "Enter the email address to associate with Git & SSH"
+read EMAIL
 
 # Show Hidden Files
 defaults write com.apple.finder AppleShowAllFiles True
-
-# Generate SSH Key
-#ssh-keygen -t rsa -b 4096 -C "${EMAIL}"
 
 # Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -15,12 +14,20 @@ defaults write com.apple.finder AppleShowAllFiles True
 brew install coreutils
 brew install wget
 brew install htop
+brew install git
 brew install scala
 brew install sbt
 brew install awscli
 brew install terraform
 brew install vault
 brew install ansible@1.9
+brew install git-crypt
+
+# Generate SSH Key
+ssh-keygen -t rsa -b 4096 -C "${EMAIL}"
+
+# Configure Git
+git config --global user.email "${EMAIL}"
 
 # Setup ZSH
 brew install zsh zsh-completions
@@ -35,8 +42,6 @@ wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/t
 mkdir -p ~/.tmp
 wget https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Solarized%20Dark%20-%20Patched.itermcolors -O ~/.tmp/Solarized.itermcolors
 open ~/.tmp/Solarized.itermcolors
-
-wget https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark -O ~/.dircolors
 
 cp ./.zshrc ~/.zshrc
 
