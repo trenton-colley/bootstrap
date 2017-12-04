@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Note: Below are packages that do not have a suitable cask or tap (homebrew)
+
+############################################
+#         DOWNLOAD ANACONDA PYTHON         #
+# https://www.anaconda.com/download/#macos #
+############################################
+
 echo "Initializing setup..."
 # Vars
 echo "Enter the email address to associate with Git & SSH"
@@ -11,17 +18,27 @@ defaults write com.apple.finder AppleShowAllFiles True
 # Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+brew tap homebrew/science
+
+# Install Utilities
 brew install coreutils
 brew install wget
 brew install htop
 brew install git
-brew install scala
 brew install sbt
 brew install awscli
 brew install terraform
 brew install vault
-brew install ansible@1.9
+brew install ansible
 brew install git-crypt
+
+# Get some casks
+brew cask install xquartz
+brew cask install rstudio
+
+# Install Languages
+brew install r
+brew install scala
 
 # Generate SSH Key
 ssh-keygen -t rsa -b 4096 -C "${EMAIL}"
