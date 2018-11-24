@@ -5,6 +5,6 @@ Development environment setup for both Windows & macOS.
 - PowerShell
 - Chocolatey
 
-## macoS
+## macOS
 - Bash
 - Homebrew
